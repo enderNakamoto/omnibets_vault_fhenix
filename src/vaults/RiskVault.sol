@@ -32,8 +32,8 @@ contract RiskVault is ERC4626 {
         betId = betId_;
     }
     
-    function transferAssets(address to, uint256 amount) external onlyController {
+    function transferAssets(address to, inEuint128 calldata amount) external onlyController {
         require(to == sisterVault, "Can only transfer to sister vault");
-        IERC20(asset()).transfer(to, amount);
+        FHERC20(asset()).transferEncrypted(to, amount);
     }
 }
